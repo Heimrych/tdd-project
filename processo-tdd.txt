@@ -1,0 +1,1 @@
+O processo TDD se dá pela criação de um teste que contempla uma nova funcionalidade e fazer esse teste passar, assim criando a funcionalidade minima necessária para isso.
