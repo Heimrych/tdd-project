@@ -1,4 +1,4 @@
-from django.test import LiveServerTestCase
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import WebDriverException
@@ -6,7 +6,7 @@ import time
 
 MAX_WAIT = 5
 
-class NewVisitorTest(LiveServerTestCase):
+class NewVisitorTest(StaticLiveServerTestCase):
 
     def setUp(self):
         self.browser = webdriver.Firefox()
@@ -81,6 +81,8 @@ class NewVisitorTest(LiveServerTestCase):
         inputbox.send_keys(Keys.ENTER)
 
         # A página atualiza novamente, e agora mostra ambos os itens na sua lista
+        self.wait_for_row_in_list_table('1: Estudar testes funcionais')
+        self.wait_for_row_in_list_table('2: Estudar testes de unidade')
         table = self.browser.find_element_by_id('id_list_table')
         rows = table.find_elements_by_tag_name('tr')
         self.assertIn('1: Estudar testes funcionais', [row.text for row in rows])
